@@ -6,5 +6,8 @@
 
 * [Software Carpentry: Version Control with Git](http://swcarpentry.github.io/git-novice)
 
+* [Git - SVN Crash Course](http://git.or.cz/course/svn.html). Brief introduction you to Git usage based on your current Subversion knowledge.
+
 ## Python
+
 * [High Performance Python](http://img105.job1001.com/upload/adminnew/2015-02-03/1422940854-U8D8OE4.pdf). Micha Gorelick & Ian Ozsvald, O'Reylly 2014.
