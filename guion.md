@@ -24,7 +24,7 @@
 * *[Puesta en común]* Sistemas de control de versiones: Git. Repositorios remotos: Github y Bitbucket
 * Creación de programas científicos de forma eficiente.
     * [Artículo "Best Practices for Scientific Computing"](http://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.1001745&type=printable). *G. Wilson et al*, PLOS Biology, 2014.
-    * [Optimización de Software Científico](optimización_software.md)
+    * [Optimización de Software Científico](optimizacion_software.md)
     * Representación de números en los ordenadores.
 	    * Ver por ejemplo [A. Quarteroni, F. Salieri: "Cálculo Científico con Matlab y Octave". Springer, 2006] o apuntes de Métodos Numéricos I (Grado en Matemáticas de la Universidad de Cádiz).
     * *[Sesión no presencial]* Programación interactiva en lenguaje Python para las Matemáticas, las Ciencias y la Ingeniería
