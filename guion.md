@@ -7,12 +7,13 @@
 * *Fecha*: 31/1/2017
 
 ### Temario:
-    * Recepción, panorámica del curso,
-    * Entornos Unix en supercomputación. La shell Unix
-	* *[Sesión no presencial]* Sistemas de control de versiones: Git. Repositorios remotos: Github y Bitbucket
-        * [Introducción a Git (UCACCAR)](https://bitbucket.org/proyecto-ucaccar/ucaccar/src/7d1fda8beb3dcaf8400d01d96e87a903750a7b27/notes-es/git.rst?fileviewer=file-view-default)
-        * [Software Carpentry: Version Control with Git](http://swcarpentry.github.io/git-novice)
-        * [Git - SVN Crash Course](http://git.or.cz/course/svn.html). Brief introduction you to Git usage based on your current Subversion knowledge.
+
+* Recepción, panorámica del curso,
+* Entornos Unix en supercomputación. La shell Unix
+* *[Sesión no presencial]* Sistemas de control de versiones: Git. Repositorios remotos: Github y Bitbucket
+   * [Introducción a Git (UCACCAR)](https://bitbucket.org/proyecto-ucaccar/ucaccar/src/7d1fda8beb3dcaf8400d01d96e87a903750a7b27/notes-es/git.rst?fileviewer=file-view-default)
+   * [Software Carpentry: Version Control with Git](http://swcarpentry.github.io/git-novice)
+   * [Git - SVN Crash Course](http://git.or.cz/course/svn.html). Brief introduction you to Git usage based on your current Subversion knowledge.
 
 
 ## Sesión 2
