@@ -20,36 +20,45 @@
 
 #### 1.1.1.3. ¿Cómo se comporta Python comparado con otras soluciones?
 
-        Ventajas:
-        -Muy rico en librerías de computación científica
-        -Permite escribir un código legible y bien estructurado
-        -Tiene muchas más librerias más allá de la computación científica.
-        -Software de código abierto con gran difusión.
-        -Tiene una gran variedad de poderosos entornos donde trabajar.
+Ventajas:
 
-        Contras:
-        -No tiene todos los algoritmos que pueden encontrarse en softwares más especializados.
+- Muy rico en librerías de computación científica
+- Permite escribir un código legible y bien estructurado
+- Tiene muchas más librerias más allá de la computación científica.
+- Software de código abierto con gran difusión.
+- Tiene una gran variedad de poderosos entornos donde trabajar.
+
+Contras:
+
+- No tiene todos los algoritmos que pueden encontrarse en softwares más especializados.
+- Frente a lenguajes compilados como C, C++ o Fortran: alejamiento del
+  hardware, menor velocidad. Idea: usar Python como "lenguaje
+  pegamento"
 
 ### 1.1.2. El ecosistema cientifico de Python.
 
 Algunos de los bloques básicos que se pueden combinar para obtener un entorno de computación científica son:
 
 **Python**, un lenguaje de programación moderno y genérico
+
 * El lenguaje: Control de flujo, tipo de datos, colección de datos, etc.
 * Módulos de la librería estandar: procesamiento de cadenas, tratamiento de archivos, protocolos simple de redes.
 * Una gran cantidad de módulos especializados escritas en Python.
 * Herramientas de desarrollo.
 
 **Librerías numéricas fundamentales:**
+
 * **Numpy**: computación numérica con poderosos objetos de tipo **arrays numéricos** y rutinas para manipularlos.
 * **Scipy**: rutinas numéricas de alto nivel.
 * **Matplotlib**: visualizaciones en 2D.
 
 **Entornos interactivos avanzados:**
+
 * **IPython**, una **consola de Python** avanzada.
 * **Jupyter**, **notebooks** en el navegador.
 
 **Paquetes específicos:**
+
 * **Mayavi** para visulacizaciones en 3D.
 * **pandas, statsmodels, seaborn** para estadística.
 * **sympy** para computación simbólica.
@@ -131,106 +140,3 @@ Ahora puedes ejecutarlo en la consola de IPython o en un notebook:
 * %cpaste permite pegar código.
 * %timeir permite medir el tiempo de ejecución.
 * %debug entra en el *debugger* en el punto donde surje el problema.
-
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

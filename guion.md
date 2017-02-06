@@ -19,6 +19,7 @@
 ## Sesión 2
 
 * *Fecha*: 3/2/2017
+
 ### Temario:
 
 * *[Puesta en común]* Sistemas de control de versiones: Git. Repositorios remotos: Github y Bitbucket
@@ -30,3 +31,15 @@
     * *[Sesión no presencial]* Programación interactiva en lenguaje Python para las Matemáticas, las Ciencias y la Ingeniería
 	    * Recomendado: [Getting started with Python for science](http://www.scipy-lectures.org/intro/intro.html)
         * También interesante: Hans Petter Langtangen: [A Primer on Scientific Programming with Python](<https://hplgit.github.io/primer.html/doc/pub/half/book.pdf>) (Springer, 2016), Secciones 1.3 y siguientes.
+
+## Sesión 3
+
+* *Fecha*: 6/2/2017
+
+### Temario:
+
+* *[Puesta en común]* Programación interactiva en lenguaje Python para las Matemáticas, las Ciencias y la Ingeniería
+* Programas interpretados (*scripts*) en Python
+* Gráficas e interpretación de resultados
+* Testeo de errores y verificación del código
+* *[Sesión no presencial]* Práctica 1. Resolución mediante diferencias finitas de la ecuación de Poisson
