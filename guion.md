@@ -30,7 +30,7 @@
 	    * Ver por ejemplo [A. Quarteroni, F. Salieri: "Cálculo Científico con Matlab y Octave". Springer, 2006] o apuntes de Métodos Numéricos I (Grado en Matemáticas de la Universidad de Cádiz).
     * *[Sesión no presencial]* Programación interactiva en lenguaje Python para las Matemáticas, las Ciencias y la Ingeniería
 	    * Recomendado: [Getting started with Python for science](http://www.scipy-lectures.org/intro/intro.html)
-        * También interesante: Hans Petter Langtangen: [A Primer on Scientific Programming with Python](<https://hplgit.github.io/primer.html/doc/pub/half/book.pdf>) (Springer, 2016), Secciones 1.3 y siguientes.
+        * También interesante: Hans Petter Langtangen: [A Primer on Scientific Programming with Python](<http://www.dsf.unica.it/~fiore/psc.pdf>) (Springer, 2016), Secciones 1.3 y siguientes.
 
 ## Sesión 3
 
