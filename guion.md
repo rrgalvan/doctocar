@@ -55,4 +55,4 @@
 * Testeo de errores y verificación del código
     * [Testing Your Code in Python](http://docs.python-guide.org/en/latest/writing/tests/)
     * Avanzado: uso de [Travis](https://en.wikipedia.org/wiki/Travis_CI) para tests automáticos de código en Github. [Introducción para principiantes](https://docs.travis-ci.com/user/for-beginners)
-* *[Sesión no presencial]* Práctica 1. Resolución mediante diferencias finitas de la ecuación de Poisson
+* *[Sesión no presencial]* Práctica 1. Resolución mediante diferencias finitas de la ecuación de Poisson. Puede consultarse el siguiente documento [Introducción a los métodos de solución numérica de E.D.P.](http://www.ugr.es/~lorente/APUNTESCN/capitulo5.pdf)
