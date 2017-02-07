@@ -39,7 +39,20 @@
 ### Temario:
 
 * *[Puesta en común]* Programación interactiva en lenguaje Python para las Matemáticas, las Ciencias y la Ingeniería
-* Programas interpretados (*scripts*) en Python
+    * [El ecosistema Python](Daniel/ecosistema_python.md)
+    * Introducción al lenguaje Python
+        * [Sección de scipy-lectures](http://www.scipy-lectures.org/intro/language/python_language.html#python-language-chapter) (secciones: *Basic types*, *Control flow*, *Defining functions*)
+		* [Sección de UCA-CCAR](https://bitbucket.org/proyecto-ucaccar/ucaccar/src/7d1fda8beb3dcaf8400d01d96e87a903750a7b27/notes-es/python.rst?fileviewer=file-view-default) (más breve)
+	* [Cálculo con *arrays*: Numpy]* Programas interpretados (*scripts*) en Python
+    	* [Secciónde scipy-lectures](http://www.scipy-lectures.org/intro/numpy/index.html) (secciones: *The Numpy array object*, *Numerical operations on arrays*)
+        * [Sección de UCA-CCAR](https://bitbucket.org/proyecto-ucaccar/ucaccar/src/7d1fda8beb3dcaf8400d01d96e87a903750a7b27/notes-es/numerical*python.rst?fileviewer=file-view-default) (más breve)
+    * Reusing code: scripts and modules
+	    * [Sección de scipy-lectures](http://www.scipy-lectures.org/intro/language/reusing*code.html)
+        * [Sección de UCA-CCAR](https://bitbucket.org/proyecto-ucaccar/ucaccar/src/7d1fda8beb3dcaf8400d01d96e87a903750a7b27/notes-es/python_scripts_modules.rst?fileviewer=file-view-default)
 * Gráficas e interpretación de resultados
+    * [Gráficas "matemáticas" en Python](http://nbviewer.jupyter.org/github/rrgalvan/python-mnii/blob/master/extra/graficas-matematicas.ipynb)
+    * [Matplotlib Examples](http://matplotlib.org/examples/index.html) (muchos ejemplos de gráficas)
 * Testeo de errores y verificación del código
+    * [Testing Your Code in Python](http://docs.python-guide.org/en/latest/writing/tests/)
+    * Avanzado: uso de [Travis](https://en.wikipedia.org/wiki/Travis_CI) para tests automáticos de código en Github. [Introducción para principiantes](https://docs.travis-ci.com/user/for-beginners)
 * *[Sesión no presencial]* Práctica 1. Resolución mediante diferencias finitas de la ecuación de Poisson
