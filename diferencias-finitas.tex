@@ -1,0 +1,267 @@
+\documentclass[11pt,spanish]{article}
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{palatino}
+\usepackage[pdftex]{hyperref}
+\usepackage{pgf}
+\usepackage[final]{svninfo}
+\usepackage[]{a4wide}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+
+%Definitions of numbers
+\def\Nset{\mathbb{N}}
+\def\Rset{\mathbb{R}}
+
+\newcommand{\en}{\mbox{\ en \ }}
+\newcommand{\sobre}{\mbox{\ sobre \ }}
+
+\title{Diferencias finitas con Python}
+\author{J. Rafael Rodríguez Galván \\[2em] \includegraphics[width=5em]{cc-by-sa}}
+
+\begin{document}
+
+\maketitle
+
+  En este documento utilizaremos Python para  la
+  aproximación numérica de ecuaciones en derivadas parciales mediante
+  el método de las diferencias finitas 1D y 2D.
+
+El método de las diferenciasfinitas consiste en reemplazar cada una de
+las derivadas parciales por aproximaciones mediante cocientes
+incrementales de orden uno o dos. Entre sus ventajas, se encuentra el
+tratarse de un método intuitivo y fácil de implementar. Su principal
+inconveniente: no es sencilla su implementación en dominios que no sean
+de intervalos (1D), rectángulos (2D), cubos (3D).
+
+\section{Diferencias finitas 1D}
+Consideremos el siguiente problema diferencial de orden 2:
+Calcular $u:[a,b] \to  \Rset$ solución de
+\begin{align}
+  \label{pb1d}
+  -\frac{d^2 u(x) }{dx^2} = f(x) \en [a,b], \\
+  u(a)=u_a, \ u(b)=u_b,
+\end{align}
+donde tanto $f$ como los datos de contorno, $u_a$ y $u_b$ son
+previamente conocidos. Bajo unas hipótesis mínimas de regularidad para
+$f$ (bastaría, por ejemplo, $f\in L^2(a,b)$, pero para utilizar el método de las
+diferencias finitas supondremos que $f$ es contínua), se sabe que el
+problema de contorno anterior tiene una única solución.
+
+\subsection{Aproximación mediante el método de diferencias finitas}
+\label{sec:diferencias-finitas-dim-1}
+Consideremos una partición del intervalo $[a,b]$ en $n+1$
+subintervalos, todos ellos de longitud $h=(b-a)/(n+1)$:
+
+$$
+a=x_0 < x_1 < \cdots < x_{n+1} = b.
+$$
+
+Calcularemos, en cada uno de los puntos $x_i$, una aproximación del
+valor de $u(x_i)$, a la que llamaremos $u_i$. Conocemos los valores $u_0$ y
+$u_{n+1}$ (pues deben coincidir, respectivamente, con los datos $u_a$
+y $u_b$), de forma que nuestras incógnitas son, exactamente, $u_1,
+u_2,\dots,u_n$. Para calcularlas, realizamos, en el sistema anterior,
+una aproximación de segundo orden\footnote{Que no es difícil de
+  deducir, utilizando los desarrollos de Taylor de $u$ en
+$x-h$ y en $x+h$. Se puede demostrar, de hecho, que si $u \in
+C^4([a,b])$, el esquema propuesto es  consistente
+y convergente (de orden $2$ en $h$).} de la derivada segunda
+:
+$$
+u''(x) \approx \frac{u(x-h)-2u(x)+u(x+h)}{h^2}.
+$$
+
+Utilizando esta fórmula en (\ref{pb1d}) para los puntos $x_i$
+($i=1,\dots,n$), obtenemos el siguiente sistema de ecuaciones:
+$$
+-\frac{u_{i-1}-2u_i + u_{i+1}}{h^2} = f_i, \quad i=1,\dots,n.
+$$
+siendo $f_i=f(x_i)$.
+No es difícil concluir que su expresión matricial es:
+
+\begin{gather}
+Au_h=f,\label{eq:sistema1D} \\
+\intertext{para la matriz}
+A=\frac{1}{h^2}\left(
+\begin{array}{rrrrrr}
+   2 & -1 &  0 &  0 & \dots & 0 \\
+  -1 &  2 & -1 &  0 & \dots & 0 \\
+   0 & -1 &  2 & -1 & \dots & 0 \\
+     &    & \ddots & \ddots & \ddots \\
+   0 & \dots & & -1 & 2  & -1 \\
+   0 & \dots & & 0 & -1 & 2
+ \end{array}
+\right),
+\\
+\intertext{y los vectores}
+u_h=
+\begin{pmatrix}
+  u_1 \\ u_2 \\ \vdots \\ u_{n-1} \\ u_n
+\end{pmatrix}
+%
+\quad \mbox{y}  \quad
+f=
+\begin{pmatrix}
+  f_1 + u_a/h^2 \\ f_2 \\ \vdots \\ f_{n-1} \\ f_n+u_b/h^2
+\end{pmatrix}
+\end{gather}
+La matriz $A$ es tridiagonal y definida positiva, lo que dota al
+sitema lineal annterior de muy buenas propiedades de cara a su
+implementación y resolución, especialmente pensando en que $n$ sea muy
+grande.
+
+\subsection{Resultados numéricos con Octave}
+Para construir el sistema (\ref{eq:sistema1D}), podemos utilizar la
+función ``diag'' (ver la ayuda de Octave).
+
+Se propone resolver la ecuación (\ref{pb1d}) para los siguientes
+parámetros:
+\begin{itemize}
+\item $[a,b]=[0,1]$
+\item $n= 10$;
+\item $h = 1/(n+1)$;
+\item Datos de contorno: $u_a=0$; $u_b=1$;
+\item Segundo miembro: $f(x)=\frac{\pi^2}{4}  \sin(x\pi/2)$
+\end{itemize}
+
+\textbf{Extensión}: definir una función, \verb|diferencias_finitas_1d|,
+que tome como parámetros:
+\begin{itemize}
+\item Los extremos del intervalo, $a$, $b$ y el tamaño de la
+  partición, $n$.
+\item Los datos de contorno, $u_a$ y $u_b$, y la función segundo
+  miembro, $f$.
+\end{itemize}
+La función debe devolver el vector solución, $u$.
+
+\section{Diferencias finitas 2D}
+
+\subsection{Aproximación mediante el método de diferencias finitas}
+\label{sec:diferencias-finitas-dim-2}
+
+Consideremos un dominio rectangular, $\Omega=(a_x,b_x)\times(a_y,b_y)
+\subset \Rset^2$.
+Planteamos el problema: Calcular $u:\Omega \to  \Rset$ solución de
+\begin{align}
+  \label{pb1d}
+  -\frac{\partial^2 u(x,y) }{\partial x^2}
+  -\frac{\partial^2 u(x,y) }{\partial y^2}
+  = f(x,y) \en \Omega, \\
+  u=g \sobre \partial\Omega
+\end{align}
+donde $\partial\Omega$ es la frontera de $\Omega$ y tanto $f(x,y)$
+como $g(x,y)$ son funciones conocidas, que supondremos continuas.
+
+
+\subsection{Aproximación mediante el método de diferencias finitas}
+\label{sec:diferencias-finitas-dim-2}
+
+Definiremos un mallado uniforme del rectángulo $\Omega$, a través de
+una partición de $[a_x,b_x]$ con talla $h_x = (b_x-a_x)/(N_x+1)$ y de
+una partición de $[a_y,b_y]$ con talla $h_y = (b_y-a_h)/(N_y+1)$.
+
+Estas particiones definen los puntos $(x_i,y_j)\in\Rset^2$, donde
+\begin{align*}
+  x_i &= i\cdot h_x, i=0,1,...,N_x+1
+  \\
+  y_j &= j\cdot h_y, j=0,1,...,N_y+1
+\end{align*}
+
+Calcularemos, en cada uno de los puntos $(x_i,y_j)$, una aproximación del
+valor de $u(x_i,y_j)$, a la que llamaremos $u_{i,j}$.
+
+De forma similar al caso $1D$, podemos aproximar cada una de las
+derivadas parciales. Sumándolas, obtendremos la siguiente aproximación:
+\begin{align*}
+  \frac{\partial^2 u(x,y) }{\partial x^2}
+  +
+  \frac{\partial^2 u(x,y)}{\partial y^2}
+  & \approx \frac{u(x-h_x,y)-2u(x,y)+u(x+h_x,y)}{h_x^2}
+  \\
+  &+
+  \frac{u(x,y-h_y)-2u(x,y)+u(x,y+h_y)}{h_y^2}
+\end{align*}
+
+Utilizando esta fórmula en los puntos $(x_i,y_j)$ de la malla,
+obtenemos el siguiente sistema de ecuaciones:
+$$
+-\frac{u_{i-1,j}-2u_{i,j} + u_{i+1,j}}{h_x^2}
+-\frac{u_{i,j-1}-2u_{i,j} + u_{i,j+1}}{h_y^2}
+= f_{i,j},
+$$
+siendo $f_{i,j}=f(x_{i},y_j), \  \quad i=1,\dots,N_x,  \quad i=1,\dots,N_y.$.
+
+Para transformar las ecuaciones anteriores en un sistema lineal,
+debemos escribir nuestras incógnitas, $u_{i,j}$ en forma de
+vector. Para ello, basta realizar una simple renumeración de los
+índices, por ejemplo, concatenando todas las filas, podemos definir el
+siguiente vector:
+$$
+u=(u_{1,1}, u_{2,1},...,u_{N_x,1},\ u_{1,2}, u_{2,2},...,u_{N_x,2},\
+...,\ u_{1,N_y}, u_{2,N_y},...,u_{N_x,N_y})
+$$
+
+
+Podemos comprobar que las ecuaciones anteriores se ajustan a la expresión
+matricial $Au=b$ para:
+$$
+A=
+\begin{pmatrix}
+   a & -b &  0 &  0 & \dots & -c & 0 & \dots & 0 \\
+  -b &  a & -b &  0 & \dots & 0 & -c & \dots & 0\\
+   0 & -b &  a & -b & \dots & 0 & 0 & \ddots & 0 \\
+   \vdots &    & \ddots & \ddots & \ddots & \\
+   -c & 0 & \dots & -b & a  & -b \\
+   0 & -c &  0 & \dots & -b & a  & -b \\
+     & & &&    & \ddots & \ddots & \ddots & \\
+   0 & \dots & &  & & & 0 & -b & a
+ \end{pmatrix},
+$$
+siendo:
+\begin{align*}
+  a&=\frac{2}{h_x^2}+\frac{2}{h_y^2} \\
+  b&=\frac{1}{h_x^2} \\
+  c&=\frac{1}{h_y^2}
+\end{align*}
+El vector diagonal $(c,c,\dots,c)$ está separado exactamente $N_x$
+posiciones de la diagonal de la matriz.
+
+En cuanto al segundo miembro, incluirá a los valores
+$f_{i,j}=f(x_i,y_j)$ (a través de una renumeración idéntica a la
+realizada para el vector $u$) y a los términos frontera
+$(1/h_x^2)g_{i,j}$ y $(1/h_y^2)g_{i,j}$, en las posiciones adecuadas.
+Para simplificar el problema, podemos asumir que la condición de
+contorno $g$, es nula salvo en el lado del rectángulo $y=y0$, es
+decirq correspondiente a los puntos
+$(x_0,y_0), (x_1,y_0),...,(x_{N_x+1},y_0)$.
+
+En tal caso, debemos sumar a los $N_x$ primeros términos segundo
+miembro los valores:
+\begin{align*}
+  \frac{1}{h_y^2} g_{i,0}, \quad i=1,...,N_x
+\end{align*}
+
+
+\subsection{Resultados numéricos con Python}
+Se propone resolver la ecuación (\ref{pb1d}) para los siguientes
+parámetros:
+\begin{itemize}
+\item $\Omega=[0,1]^2$
+\item $N_x=N_y=10$;
+\item $f=0$, $g=1$ en el lado $y=y_0=0$.
+  $(x_0,y_0), (x_1,y_0),...,(x_{N_x+1},y_0)$. $f=g=0$ en el resto de
+  la frontera.
+\end{itemize}
+
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
