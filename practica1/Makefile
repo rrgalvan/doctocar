@@ -3,3 +3,5 @@ tests: poisson_tests.py
 
 clean:
 	rm -f *~
+
+.PHONY: clean

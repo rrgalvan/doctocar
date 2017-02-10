@@ -34,7 +34,7 @@
 
 ## Sesión 3
 
-* *Fecha*: 6/2/2017
+* *Fecha*: 7/2/2017
 
 ### Temario:
 
@@ -56,3 +56,15 @@
     * [Testing Your Code in Python](http://docs.python-guide.org/en/latest/writing/tests/)
     * Avanzado: uso de [Travis](https://en.wikipedia.org/wiki/Travis_CI) para tests automáticos de código en Github. [Introducción para principiantes](https://docs.travis-ci.com/user/for-beginners)
 * *[Sesión no presencial]* Práctica 1. Resolución mediante diferencias finitas de la ecuación de Poisson. Puede consultarse el siguiente documento [Introducción a los métodos de solución numérica de E.D.P.](http://www.ugr.es/~lorente/APUNTESCN/capitulo5.pdf)
+
+## Sesión 4
+
+* *Fecha*: 10/2/2017
+
+### Temario:
+
+* *[Puesta en común]* Práctica 1. Resolución mediante diferencias finitas de la ecuación de Poisson
+    * Mejora del rendimiento del código Python usando "*slicing*" para arrays
+	* Introducción de tests para verificar el correcto funcionamiento del código
+* Proyectos Make, ver por ejemplo la página correspondiente en [Software Carpentry](https://swcarpentry.github.io/make-novice/02-makefiles/)
+* *[Sesión no presencial]* [Introducción a C++. Biblioteca matricial "Eigen"](https://rrgalvan.github.io/cpp-intro/)
