@@ -1,0 +1,3 @@
+En OSX (Mac) para compilar con la librería Eigen hay que hacerlo con el comando
+
+	g++ -I /usr/local/include/eigen3/ Ejemplo.cpp -o Ejemplo
