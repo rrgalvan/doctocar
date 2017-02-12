@@ -68,3 +68,30 @@
 	* Introducción de tests para verificar el correcto funcionamiento del código
 * Proyectos Make, ver por ejemplo la página correspondiente en [Software Carpentry](https://swcarpentry.github.io/make-novice/02-makefiles/)
 * *[Sesión no presencial]* [Introducción a C++. Biblioteca matricial "Eigen"](https://rrgalvan.github.io/cpp-intro/)
+
+## Sesión 5
+
+* *Fecha*: 13/2/2017
+* *[Puesta en común]* [Introducción a C++. Biblioteca matricial "Eigen"](https://rrgalvan.github.io/cpp-intro/)
+* *Acceso desde Python a Bibliotecas C++*
+    Distintas posibilidades:
+    1. Acceder a la API (*Application Programmers Interface*) del
+       intérprete Python (en concreto, de CPython): funciones y
+       variables contenidas en `Python.h`. [Ver manual de Python](https://docs.python.org/2/extending/extending.html)
+        * Inconveniente: Solución de bajo nivel, propensa a errores
+	2. Usar [Swig](http://www.swig.org/)
+    	* Herramienta para generar acceder a C/C++ desde distintos lenguajes interpretados, entre ellos *Python*
+		* Idea:
+    		1. Crear un fichero de *interface*, que contendrá los ficheros de cabecera para el código C/C++
+			2. Ejecutar Swig para construir un "envoltorio" sobre el código C/C++. Éste será accesible desde Python
+			3. Compilar el código y el "envoltorio" C/C++
+			4. Generar una biblioteca dinámica (`.so` , `.dylib`, `.dll`, etc), conteniendo un módulo al que se puede acceder desde Python
+	3. Usar [Boost.Python](http://www.boost.org/doc/libs/1_63_0/libs/python/doc/html/index.html)
+	    * Biblioteca específica para acceder a Python desde C/C++.
+        * Idea:
+    		1. Crear un fichero de *interface*, que contendrá los ficheros de cabecera para el código C/C++
+			2. Crear un envoltorio desde C/C++, usando las macros proporcionadas por la biblioteca Boost.Python
+			3. Generar una biblioteca dinámica, conteniendo un módulo al que se puede acceder desde Python. Para esto puede usarse el paquete Python [distutils](https://docs.python.org/2/library/distutils.html), diseñado específicamente para construir módulos de extensión para Python.
+		Más detalles, por ejemplo, en [1](http://www.boost.org/doc/libs/1_63_0/libs/python/doc/html/tutorial/index.html#tutorial.quickstart), [2](https://en.wikibooks.org/wiki/Python_Programming/Extending_with_C%2B%2B)
+	4. Usar [Cython](http://cython.org/), una extensión (un superconjunto) del lenguaje Python que permite definir variables y llamar funciones C.
+* Práctica 2. El problema de Poisson en C++
