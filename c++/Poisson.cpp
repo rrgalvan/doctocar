@@ -13,7 +13,7 @@ float** Poisson2D(float (*f)(float,float),float (*g)(float,float), int M)
 	float h;
 	float **v;
 	// Calculo h.
-	h = 1.0/(M+1);
+	h = 1/(M+1);
 	// Inicializo u.
 	v = (float**)malloc((M+2)*sizeof(float*));
 	for(int i=0;i<M+2;i++)
