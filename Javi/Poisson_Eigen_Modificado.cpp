@@ -19,27 +19,29 @@ MatrixXf Poisson2D (float (*f)(float,float),float (*g)(float,float), int M)
 	MatrixXf f_val(M,M);
 
 	// Calculamos h y h2
-	h  = 1/(M+1);
+	h  = 1.0/(M+1);
 	h2 = h*h;
 	
-  // Cargamos las condiciones de frontera horizontales.
-	for(int j=0;j<M+2;j++)
+  // Condiciones de frontera en esquinas
+  v(0,0)   = g(0,0);
+  v(M+1,0) = g(1,0);
+  v(0,M+1)   = g(0,1);
+  v(M+1,M+1) = g(1,1);	
+
+  for(int i=0;i<M;i++)
 	{
-        	v(0,j)   = g(0,j*h);
-        	v(M+1,j) = g(1,j*h);
-	}
-    	
-	// Cargamos las condiciones de frontera verticales.
-    	for(int i=0;i<M;i++)
-	{
+          // Condiciones de frontera verticales
+    	    v(0,i+1)   = g(0,(i+1)*h);
+    	    v(M+1,i+1) = g(1,(i+1)*h);
+    	    
+    	    // Condiciones de frontera verticales
         	v(i+1,0)   = g((i+1)*h,0);
         	v(i+1,M+1) = g((i+1)*h,1);
+        	
+        	// Almacenamos los valores de f
+        	for(int j=0; j<M; j++)
+        	  f_val(i,j) = f((i+1)*h,(j+1)*h);
 	}
-    	
-	// Almacenamos los valores de f
-	for(int i=0; i<M; i++)
-		for(int j=0; j<M; j++)
-			f_val(i,j) = f((i+1)*h,(j+1)*h);
 	
 	// Rellenamos el resto de la matriz
 	for(int k=0;k<M;k++) 
