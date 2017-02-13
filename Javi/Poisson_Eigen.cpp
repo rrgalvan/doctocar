@@ -19,7 +19,7 @@ MatrixXf Poisson2D (float (*f)(float,float),float (*g)(float,float), int M)
 	MatrixXf f_val(M,M);
 
 	// Calculamos h y h2
-	h  = 1/(M+1);
+	h  = 1.0/(M+1);
 	h2 = h*h;
 	
   // Cargamos las condiciones de frontera horizontales.
