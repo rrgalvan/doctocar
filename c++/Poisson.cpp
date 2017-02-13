@@ -10,10 +10,11 @@ float f(float x,float y)
 
 float** Poisson2D(float (*f)(float,float),float (*g)(float,float), int M)
 {
+  int niter=M*M;
 	float h;
 	float **v;
 	// Calculo h.
-	h = 1/(M+1);
+	h = 1.0/(M+1);
 	// Inicializo u.
 	v = (float**)malloc((M+2)*sizeof(float*));
 	for(int i=0;i<M+2;i++)
@@ -33,7 +34,7 @@ float** Poisson2D(float (*f)(float,float),float (*g)(float,float), int M)
         v[i+1][M+1] = g((i+1)*h,1);
 	}
     // Rellenamos el resto de la matriz.
-	for(int k=0;k<M;k++) 
+	for(int k=0;k<niter;k++)
 		for(int i=1;i<M+1;i++)
 			for(int j=1;j<M+1;j++)
                 v[i][j]=0.25*(v[i-1][j]+v[i+1][j]+v[i][j-1]+v[i][j+1]-h*h*f(i*h,j*h));
@@ -63,10 +64,11 @@ void LiberarMatriz(float **m, int n)
 
 int main(void)
 {
+  int npuntos=100;
 	float **m;
-	m = Poisson2D(&f,&f,3);
-	PintarMatriz(m,3);
-	LiberarMatriz(m,3);
+	m = Poisson2D(&f,&f,npuntos);
+	PintarMatriz(m,npuntos);
+	LiberarMatriz(m,npuntos);
 }
 
 /*
