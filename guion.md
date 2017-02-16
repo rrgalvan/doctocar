@@ -95,3 +95,45 @@
 		Más detalles, por ejemplo, en [1](http://www.boost.org/doc/libs/1_63_0/libs/python/doc/html/tutorial/index.html#tutorial.quickstart), [2](https://en.wikibooks.org/wiki/Python_Programming/Extending_with_C%2B%2B)
 	4. Usar [Cython](http://cython.org/), una extensión (un superconjunto) del lenguaje Python que permite definir variables y llamar funciones C.
 * Práctica 2. El problema de Poisson en C++
+
+## Sesión 6.
+
+### Profundizando en el lenguaje C++
+
+* *Programación orientada a objetos*. Ver, por ejemplo [1](http://umh1467.edu.umh.es/wp-content/uploads/sites/25/2016/02/Programacio%CC%81n-Orientada-a-Objetos.pdf)
+
+* *Buenas prácticas* para orientación a objetos en C++:
+    * Utilizar un fichero de cabecera `.h` o `.hpp` para cada clase o,
+      excepcionalmente, para un conjunto de clases estrechamente
+      ligadas. El fichero debería reflejar el nombre de la clase.
+    * Frecuentemente, se utilizan letras mayúsculas para clases (como
+      `BaseClass`) y letras minúsculas para funciones (como
+      `funcionMiembro`), variables. Los ficheros de cabecera suelen
+      tener el mismo nombre que la clase pero con letras minúsculas.
+    * No utilizar rutas completas para incluir ficheros de cabecera
+      (para evitar problemas de *portabilidad*). Es mejor usar
+      directivas de compilación del tipo
+      `-I/ruta_a_ficheros_de_cabecera`
+    * Usar lertas mayúsculas (MAYUSCULAS) para variables el preprocesador o para enumeraciones.
+    * Para evitar inclusión múltiple, usar el procesador: `#ifndef __CLASS_NAME__ ` (...)
+    * Usar la palabra clave `const` para indicar que una variable o el
+      parámetro de una función no va a cambiar su valor
+	* Elegir un estilo y ser consistente con él en todo el
+      proyecto. Por ejemplo, a mi me gusta dejar espacios en blanco a
+      ambos lados de los operadores (`+`, `-`, `<`,...). Existen
+      numerosos estilos corporativos, por
+      ejemplo [Ellemtel](http://www.doc.ic.ac.uk/lab/cplus/c++.rules),
+      con los que se integran editores como Emacs.
+
+* *Doxygen* es un generador de documentación a partir comentarios formateados. La idea es:
+    1. Utilizar bloques especiales en los comentarios sobre funciones, clases, etc. Véase la sección [Documenting the code](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html) en su página web. Estos bloques [admiten código *markdown*](http://www.stack.nl/~dimitri/doxygen/manual/markdown.html)
+    2. Ejecutar la orden
+	```
+	doxygen -g <config-file>
+	```
+	para crear un fichero de configuración, antes de generar la documentación. Si se omite el nombre del fichero, se creará automáticamente un fichero de documentación llamado `Doxyfile`, que se puede usar como plantilla y usarla como configuración por defecto. Ver más detalles en [Getting Started](http://www.stack.nl/~dimitri/doxygen/manual/starting.html)
+   3. Una vez existe un fichero de configuración, basta ejecutar
+   ```
+   doxygen <config-file>
+   ```
+   para generar la documentación, típicamente en HTML, aunque también en PDF y en otros formatos, según las instrucciones que hayan sido indicadas en del fichero de configuración.
