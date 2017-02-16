@@ -3,9 +3,11 @@
 
 int main(void)
 {
-  MatrixXf m;
+  //MatrixXf m;
 
-  m = Poisson2D<100>(&f,&f);
+  //m = Poisson2D<100>(&f,&f);
 
-  cout << "m =" << endl << m << endl;
+	Clase_Poisson2D<float, 100> m;
+
+  //cout << "m =" << endl << m << endl;
 }
