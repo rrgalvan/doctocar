@@ -3,11 +3,9 @@
 
 int main(void)
 {
-  //MatrixXf m;
-
-  //m = Poisson2D<100>(&f,&f);
 
 	Clase_Poisson2D<float, 100> m;
+	m.diffin(f,f);
+	m.mostrar();
 
-  //cout << "m =" << endl << m << endl;
 }

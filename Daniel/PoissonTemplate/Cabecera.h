@@ -15,26 +15,38 @@ class Clase_Poisson2D
 private:
 	// Definimos los valores constantes.
 	float h,h2;
-	T M;
-	// Definimos las matrices.
-	// Definimos las matrices
-  	//MatrixXf v = MatrixXf::Constant(M+2,M+2,0);
-  	//MatrixXf f_val(M,M);
-	void calcularhs(void);
-/*public:
-	void diffin((T (*f)(T,t),T (*g)(T,T)));*/
+	// Definimos las matrices V y F.
+  	MatrixXf v;
+  	MatrixXf f_val;
+	void Calcularhs(void);
+public:
+	// Constructor.
+	Clase_Poisson2D();
+	// Metodo de las Diferencias Finitas.
+	void diffin(T (*f)(T,T),T (*g)(T,T));
+	// Mostrar la matriz.
+	void mostrar(void);
 };
 
+
 template<class T, int M>
-void Clase_Poisson2D::Calcularhs()
+Clase_Poisson2D<T,M>::Clase_Poisson2D()
+{
+	Calcularhs();
+	v = MatrixXf::Constant(M+2,M+2,0);
+	f_val = MatrixXf::Constant(M,M,0);
+}
+
+template<class T, int M>
+void Clase_Poisson2D<T,M>::Calcularhs()
 {
 	h = 1.0/(M+1);
 	h2 = h*h;
 }
 
-/*
-template<class T>
-void Clase_Poisson2D::diffin((T (*f)(T,t),T (*g)(T,T)))
+
+template<class T,int M>
+void Clase_Poisson2D<T,M>::diffin(T (*f)(T,T),T (*g)(T,T))
 {
 	// Condiciones de frontera en esquinas
 	 v(0,0)   = g(0,0);
@@ -63,10 +75,12 @@ void Clase_Poisson2D::diffin((T (*f)(T,t),T (*g)(T,T)))
 			       + v.block(1,0,M,M) + v.block(1,2,M,M) + h2*f_val );
 
 }
-*/
 
-
-
+template<class T, int M>
+void Clase_Poisson2D<T,M>::mostrar()
+{
+	cout << "V =" << endl << v << endl;
+}
 
 
 
