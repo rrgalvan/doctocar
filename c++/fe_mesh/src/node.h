@@ -1,24 +1,23 @@
-#ifndef __NODE_HPP__
-#define __NODE_HPP__
+#ifndef __NODE_H__
+#define __NODE_H__
 
-#include <ostream>
+#include <ostream> // For definition of operator <<
+
+typedef std::size_t size_t;
 
 /// A node class
 template<class PointT> class Node {
-  PointT location;
-  int index;
-  int sharingElements;
 public:
   //! \brief Default constructuor
   //! \param loc Location in space
   //! \param ind Index for current node
   //! \param sharing Number of elements that share current node
-  Node(const PointT&loc=0., int ind=-1, int sharing=0)
+  Node(const PointT&loc=0., size_t ind=-1, size_t sharing=0)
     : location(loc), index(ind), sharingElements(sharing)
   {}
 
   //! Copy constructor
-  Node(const Node& n)
+  explicit Node(const Node& n)
     : location(n.location), index(n.index), sharingElements(n.sharingElements){}
 
   //! Assignement operator
@@ -33,12 +32,12 @@ public:
   }
 
   //! Read index of this node
-  int getIndex() const {
+  size_t getIndex() const {
     return index;
   }
 
   //! Read number of elements that share this node
-  int getSharingElements() const{
+  size_t getSharingElements() const{
     return sharingElements;
   }
 
@@ -48,15 +47,19 @@ public:
   }
 
   //! Decrease number of elements that share this node
-  int decSharingElements(){
+  size_t decSharingElements(){
     return !(--sharingElements);
   }
 
   //! Indicate a dangling node
-  int noSharingElement() const {
+  size_t noSharingElement() const {
     return !sharingElements;
   }
 
+private:
+  PointT location;
+  size_t index;
+  size_t sharingElements;
 };
 
 //! Print a node
@@ -86,4 +89,4 @@ std::ostream &operator<<(std::ostream &os, Node<PointT> const &n) {
   return os;
 }
 
-#endif // __NODE_HPP__
+#endif // __NODE_H__
