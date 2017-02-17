@@ -1,6 +1,7 @@
 SOURCES = $(wildcard *.cpp)  
 OBJECTS = $(subst .cpp,.o,$(SOURCES))
 SOBRANTES = $(wildcard *~)
+EIGENDIR=/usr/include/eigen3/
 
 .PHONY: test clear help
 
@@ -8,7 +9,7 @@ ejecutable: $(OBJECTS)
 	g++ $(OBJECTS) -o ejecutable
 
 $(OBJECTS).o: $(SOURCES)
-	g++  -O2 -I /usr/include/eigen3/ -c $(SOURCES)
+	g++  -O2 -I $(EIGENDIR) -c $(SOURCES)
 
 clear:
 	rm $(OBJECTS) ejecutable $(SOBRANTES)
