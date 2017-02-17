@@ -137,3 +137,5 @@
    doxygen <config-file>
    ```
    para generar la documentación, típicamente en HTML, aunque también en PDF y en otros formatos, según las instrucciones que hayan sido indicadas en del fichero de configuración.
+
+* [OpenMP](./intro-openmp.html)

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="introduction-to-openmp-in-c-and-fotran">Introduction to OpenMP in C++ and Fotran</h1>
+<p>OpenMP consists of a set of compiler directives (&quot;#pragma omp&quot; in C++ and &quot;!omp&quot; commentaries in Fortran 90). Due to this design, if the compiler does not support OpenMP the program will still be built, but without any parallelism.</p>
+<p>For instance, the following progam creates a table of values, which is initialized with the values of <span class="math inline">sin(<em>x</em>)</span>, with <span class="math inline"><em>x</em> ∈ [0, 2<em>π</em>]</span>.</p>
+<pre><code>  #include &lt;cmath&gt;
+  int main()
+  {
+    const long int size=1024;
+    double sinArray[size];
+
+    // Initialize the array (in parallel) with values of sin(x)
+    #pragma omp parallel for
+    for(long k=0; k&lt;size; k++)
+      {
+        sinArray[k] = std::sin(2*M_PI/(size-1) * k);
+      }
+  }
+</code></pre>
+<p>This code divides the for loop into a number of threads (the number of threads is defined by the sistem, by default, see deatils below), which are run simultaneously. Each thread Initializes a portion of the array.</p>
+<p>Using the GCC C++, the program can be compiled like follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">g++</span> -fopenmp programa.cpp</code></pre></div>
+<p>OpenMP provides advanced possibilities, some of which will not dealed here. For instance If the compiler supports OPENMP 4.0 and a parallel floating point library such as AMD ACML or Intel SVML is available, the previous code can be enhanced using SIMD directives. Another characteristic supported by OPENMP 4.0 is the offloading of code to different devices, such as GPU's. This possibilty was improved in OpenMP 4.5.</p>
+<h1 id="basic-syntax-parallel-and-for-constructs">Basic syntax: <code>parallel</code> and <code>for</code> constructs</h1>
+<h2 id="example-1.-the-parallel-construct">Example 1. The <code>parallel</code> construct</h2>
+<p>A OpenMP program begins as a simple thread, called initial thread, which is executed sequentially.</p>
+<p>When the initial thread finds a <code>parallel</code> construct, it creates a <em>team</em> of multiple <em>threads</em> which are run in parallel. When all threads finish their task, the <code>parallel</code> region is completed and the initial thread resumes execution of the program.</p>
+<p>In C++, the <code>#pragma omp</code> applies to the surronding statement, which can be a code block:</p>
+<pre><code>  #pragma omp parallel
+  {
+    // Code inside this region is executed by every thread
+    std::cout &lt;&lt; &quot;Hello in parallel region&quot; &lt;&lt; std::endl;
+  }
+</code></pre>
+<p>The number of threads of a parallel region can be set by the <code>OMP_NUM_THREADS</code> environment variable, the <code>omp_set_num_threads()</code> function (whiech is provided in a header file named <code>omp.h</code>) or the <code>num_threads</code> clause of the <code>parallel</code> directive. <code>OMP_NUM_THREADS</code> has greater recedence than <code>omp_set_num_threads()</code>, which has greater precedence than <code>num_threads</code> clause.</p>
+<p>An example in Fortran, where the parallel region is enclosed by <code>!$omp</code> commentaries:</p>
+<div class="sourceCode" rundoc-language="fortran" rundoc-flags="-fopenmp"><pre class="sourceCode fortran rundoc-block"><code class="sourceCode fortran">    <span class="co">!$omp parallel num_threads(2)</span>
+    <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Hello in parallel region&quot;</span>
+    <span class="co">!$omp end parallel</span>
+    <span class="fu">print</span><span class="kw">*</span>, <span class="st">&quot;Bye&quot;</span></code></pre></div>
+<h2 id="loop-construct-for-c-and-do-fortran">Loop construct: <code>for</code> (C++) and <code>do</code> (Fortran)</h2>
+<p>Inside a <code>parallel</code> block, the loop construct specifies that the different portions of the iterations of a <code>for</code> loop (or a <code>do</code> lopp, in Fortran) will be executed in parallel by the different threads in the current team.</p>
+<p>The following example will output each number in <span class="math inline">{0, 1, …, 9}</span> in parallel (in arbitrary order).</p>
+<pre><code>  #pragma omp parallel
+  {
+  #pragma omp for
+  for(int i=0; i&lt;10; i++)
+    {
+      std::cout &lt;&lt; i &lt;&lt; &#39; &#39;;
+    }
+  }
+  std::cout &lt;&lt; std::endl;
+</code></pre>
+<p>The <code>parallel</code> and <code>for</code> constructs can be abreviated as follows:</p>
+<pre><code>  #pragma omp parallel for
+  {
+  for(int i=0; i&lt;10; i++)
+    {
+      std::cout &lt;&lt; i &lt;&lt; &#39; &#39;;
+    }
+
+</code></pre>
+<p>The <code>for</code> construct specifies that the iterations of one loop will be executed in parallel by the threads that already exists (in a <code>parallel</code> region).</p>
+<pre><code>  #pragma omp parallel
+  {
+    #pragma omp for
+    for(int n=0; n&lt;10; ++n)
+    {
+      std::cout &lt;&lt; n;
+    }
+    std::cout &lt;&lt; std::endl;
+  }
+</code></pre>
+<p>A equivalent shorthand:</p>
+<pre><code>  #pragma omp parallel for num_threads(4)
+  for(int n=0; n&lt;10; ++n)
+  {
+    std::cout &lt;&lt; n;
+  }
+  std::cout &lt;&lt; std::endl;
+</code></pre>
+<h2 id="sections">Sections</h2>
+<p>The <code>sections</code> construct allows to define code blocks, each of which will be executed by a thread in the current <code>parallel</code> team.</p>
+</body>
+</html>
