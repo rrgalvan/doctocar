@@ -1,13 +1,15 @@
 #ifndef __NODE_HPP__
 #define __NODE_HPP__
 
-///A node class
+#include <ostream>
+
+/// A node class
 template<class PointT> class Node {
   PointT location;
   int index;
   int sharingElements;
 public:
-  //! \brief Constructuor
+  //! \brief Default constructuor
   //! \param loc Location in space
   //! \param ind Index for current node
   //! \param sharing Number of elements that share current node
@@ -19,16 +21,14 @@ public:
   Node(const Node& n)
     : location(n.location), index(n.index), sharingElements(n.sharingElements){}
 
-  //! \brief Assignement operator
-  //! \param node: Node objet whose values shall be copied
-  //! \returnsx: Current node, after actualization
+  //! Assignement operator
   const Node& operator=(const Node& node);
 
   //! Destructor
   ~Node(){}
 
   //! Read the location of this Node
-  const PointT& operator()() const {
+  const PointT& getLocation() const {
     return location;
   }
 
@@ -43,12 +43,12 @@ public:
   }
 
   //! Increase number of elements that share this node
-  void moreSharingElements(){
+  void incSharingElements(){
     sharingElements++;
   }
 
   //! Decrease number of elements that share this node
-  int lessSharingElements(){
+  int decSharingElements(){
     return !(--sharingElements);
   }
 
@@ -59,5 +59,31 @@ public:
 
 };
 
+//! Print a node
+template<class PointT>
+void print(const Node<PointT>&n){
+  print(n());
+  printf("index=%d; %d sharing elements\n",
+	 n.getIndex(),n.getSharingElements());
+}
+
+// Assignment operator
+template<class PointT>
+const Node<PointT>& Node<PointT>::operator=(const Node<PointT>& n){
+  if(this != &n){
+    location = n.location;
+    index = n.index;
+    sharingElements = n.sharingElements;
+  }
+  return *this;
+}
+
+//! Print a node
+template<class PointT>
+std::ostream &operator<<(std::ostream &os, Node<PointT> const &n) {
+  os << n.getLocation() << ": index=" << n.getIndex()
+     << ", sharing_elements=" << n.getSharingElements();
+  return os;
+}
 
 #endif // __NODE_HPP__
