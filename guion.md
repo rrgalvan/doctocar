@@ -138,4 +138,4 @@
    ```
    para generar la documentación, típicamente en HTML, aunque también en PDF y en otros formatos, según las instrucciones que hayan sido indicadas en del fichero de configuración.
 
-* [OpenMP](./intro-openmp.md)
+* [OpenMP](https://htmlpreview.github.io/?https://github.com/rrgalvan/doctocar/blob/master/intro-openmp.html)
