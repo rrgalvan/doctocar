@@ -53,7 +53,7 @@ public:
   }
 
   //! Indicate a dangling node
-  int noSharingElement() const{
+  int noSharingElement() const {
     return !sharingElements;
   }
 

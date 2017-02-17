@@ -139,3 +139,7 @@
    para generar la documentación, típicamente en HTML, aunque también en PDF y en otros formatos, según las instrucciones que hayan sido indicadas en del fichero de configuración.
 
 * [OpenMP](https://htmlpreview.github.io/?https://github.com/rrgalvan/doctocar/blob/master/intro-openmp.html)
+
+## Temas relacionados y material compolementario
+
+*  [Particle tracing](https://ai2-s2-pdfs.s3.amazonaws.com/0a62/57254285aa7d792a1056a19c31f5f79d0576.pdf)
