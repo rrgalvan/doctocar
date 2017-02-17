@@ -2,7 +2,7 @@ FE_MESH_SRC=../src
 TARGETS = point_example node_example element_example
 INCLUDE_DIR = $(FE_MESH_SRC)
 OBJECTS = $(wildcard $(FE_MESH_SRC)/*.o)
-INCLUDES = $(wildcard $(FE_MESH_SRC)/*.hpp)
+INCLUDES = $(wildcard $(FE_MESH_SRC)/*.h)
 CXX_FLAGS=-std=c++11
 
 all: $(TARGETS)

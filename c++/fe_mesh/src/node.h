@@ -9,16 +9,16 @@ typedef std::size_t size_t;
 template<class PointT> class Node {
 public:
   //! \brief Default constructuor
-  //! \param loc Location in space
+  //! \param coord Coordinates in space
   //! \param ind Index for current node
   //! \param sharing Number of elements that share current node
-  Node(const PointT&loc=0., size_t ind=-1, size_t sharing=0)
-    : location(loc), index(ind), sharingElements(sharing)
+  Node(const PointT&coord=0., size_t ind=-1, size_t sharing=0)
+    : coord(coord), index(ind), sharingElements(sharing)
   {}
 
   //! Copy constructor
   explicit Node(const Node& n)
-    : location(n.location), index(n.index), sharingElements(n.sharingElements){}
+    : coord(n.coord), index(n.index), sharingElements(n.sharingElements){}
 
   //! Assignement operator
   const Node& operator=(const Node& node);
@@ -26,9 +26,9 @@ public:
   //! Destructor
   ~Node(){}
 
-  //! Read the location of this Node
-  const PointT& getLocation() const {
-    return location;
+  //! Read the coord of this Node
+  const PointT& getCoord() const {
+    return coord;
   }
 
   //! Read index of this node
@@ -57,7 +57,7 @@ public:
   }
 
 private:
-  PointT location;
+  PointT coord;
   size_t index;
   size_t sharingElements;
 };
@@ -74,7 +74,7 @@ void print(const Node<PointT>&n){
 template<class PointT>
 const Node<PointT>& Node<PointT>::operator=(const Node<PointT>& n){
   if(this != &n){
-    location = n.location;
+    coord = n.coord;
     index = n.index;
     sharingElements = n.sharingElements;
   }
@@ -84,7 +84,7 @@ const Node<PointT>& Node<PointT>::operator=(const Node<PointT>& n){
 //! Print a node
 template<class PointT>
 std::ostream &operator<<(std::ostream &os, Node<PointT> const &n) {
-  os << n.getLocation() << ": index=" << n.getIndex()
+  os << n.getCoord() << ": index=" << n.getIndex()
      << ", sharing_elements=" << n.getSharingElements();
   return os;
 }

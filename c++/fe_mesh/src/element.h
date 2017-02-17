@@ -1,5 +1,5 @@
-#ifndef __FINITE_ELEMENT_H__
-#define __FINITE_ELEMENT_H__
+#ifndef __ELEMENT_H__
+#define __ELEMENT_H__
 
 #include "node.h"
 
@@ -87,4 +87,4 @@ std::ostream& operator<<(std::ostream& os, Element<PointT,N> const& e) {
   return os;
 }
 
-#endif // __FINITE_ELEMENT_H__
+#endif // __ELEMENT_H__

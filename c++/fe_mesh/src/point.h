@@ -32,7 +32,7 @@ public:
     static_assert(Dim == 3, "XYZ constructor only usable in 3D");
   }
 
-  const T* get_coords() const {
+  const T* getCoords() const {
     return coord;
   }
 
@@ -50,7 +50,7 @@ typedef Point<3, double> Point3D;
 //! Print a node
 template <std::size_t Dim, typename T>
 std::ostream &operator<<(std::ostream &os, Point<Dim,T> const &p) {
-  const T* coord = p.get_coords();
+  const T* coord = p.getCoords();
   os << "(" << coord[0];
   for (int i=1; i<Dim; i++) os << ", " << coord[i];
   os << ")";
