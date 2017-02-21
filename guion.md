@@ -142,4 +142,11 @@
 
 ## Temas relacionados y material compolementario
 
-*  [Particle tracing](https://ai2-s2-pdfs.s3.amazonaws.com/0a62/57254285aa7d792a1056a19c31f5f79d0576.pdf)
+### Particle tracing
+* [Particle Tracing](https://ai2-s2-pdfs.s3.amazonaws.com/0a62/57254285aa7d792a1056a19c31f5f79d0576.pdf)
+* [Parallel Implementation of Particle Tracing FEM](http://www.cimec.org.ar/ojs/index.php/mc/article/viewFile/3967/3884)
+
+### Conway's Game of Life
+* [Conway's Game of Life (Wikipedia)](https://en.wikipedia.org/wiki/Conway's_Game_of_Life)
+* [Golly (Potente versión, con licencia libre)](http://golly.sourceforge.net/)
+* [Implementación en (decenas de) lenguajes](http://rosettacode.org/wiki/Conway%27s_Game_of_Life)
