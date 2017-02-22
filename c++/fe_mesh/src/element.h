@@ -5,7 +5,9 @@
 
 /// A finite element class who stores pointers to N nodes (they can be
 /// usually identified with vertices).
-template<class PointT, int N> class Element {
+template<class PointT, int N>
+class Element
+{
 public:
   //! Default constructor
   Element() {

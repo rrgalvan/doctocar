@@ -2,6 +2,7 @@
 #define __NODE_H__
 
 #include <ostream> // For definition of operator <<
+#include "point.h"
 
 typedef std::size_t size_t;
 
@@ -61,6 +62,13 @@ private:
   size_t index;
   size_t sharingElements;
 };
+
+/// Node1D
+typedef Node<Point1D> Node1D;
+/// Node2D
+typedef Node<Point2D> Node2D;
+/// Node3D
+typedef Node<Point3D> Node3D;
 
 //! Print a node
 template<class PointT>

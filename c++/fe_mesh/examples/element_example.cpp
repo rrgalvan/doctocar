@@ -1,5 +1,4 @@
 #include <iostream>
-#include <utility>      // std::pair, std::make_pair
 #include "element.h"
 
 using namespace std;
