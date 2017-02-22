@@ -16,7 +16,7 @@ public:
   /// Constructor just for 1d points
   explicit Point(const T& x) : coord{x}
   {
-    static_assert(Dim == 1, "X constructor only usable in 1D");
+    std::fill_n(coord, Dim, T(x));
   }
 
   /// Constructor just for 2d points
@@ -41,11 +41,11 @@ private:
 };
 
 //! 1d point
-typedef Point<1, double> Point1D;
+typedef Point<size_t(1), double> Point1D;
 //! 2d point
-typedef Point<2, double> Point2D;
+typedef Point<size_t(2), double> Point2D;
 //! 3d point
-typedef Point<3, double> Point3D;
+typedef Point<size_t(3), double> Point3D;
 
 //! Print a node
 template <std::size_t Dim, typename T>

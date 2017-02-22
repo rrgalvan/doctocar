@@ -7,21 +7,23 @@
 template<class ElementT>
 class Mesh
 {
-  std::list<ElementT> _elements;
  public:
   //! Default constructor
   Mesh() {}
   //! Destructor
   ~Mesh() {}
   /// Access to elements
-  std::list<ElementT> const& elements() const {
+  std::list<ElementT> elements() {
     return _elements;
   }
   /// Append an element
-  void append_element(ElementT const& e) {
-    _elements.append(e);
+  void append_element(ElementT& e) {
+    _elements.push_back(e);
   }
- private:
+ public:
+  // Elements stored in current mesh
+  std::list<ElementT> _elements;
+
   /// Copy constructor is forbidden (private and not implemented)
   Mesh(Mesh const&);
 };

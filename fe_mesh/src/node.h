@@ -13,7 +13,7 @@ public:
   //! \param coord Coordinates in space
   //! \param ind Index for current node
   //! \param sharing Number of elements that share current node
-  Node(const PointT&coord=0., size_t ind=-1, size_t sharing=0)
+  Node(const PointT&coord=PointT(0.), size_t ind=-1, size_t sharing=0)
     : coord(coord), index(ind), sharingElements(sharing)
   {}
 
