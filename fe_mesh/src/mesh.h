@@ -104,11 +104,9 @@ MeshT build_square_msh(int nx, int ny)
  * \returns 0 if file was successfully opened and read
  */
 template<class ElementT, class ElementContainerT>
-int read_file_msh(Mesh<ElementT, ElementContainerT>& mesh, std::string filename);
-
-template<class ElementContainerT>
-int read_file_msh(Mesh<Element<Node2D, 3>, ElementContainerT>& mesh, std::string filename) {
-  using Triangle = Element<Node2D, 3>;
+int read_file_msh(Mesh<ElementT, ElementContainerT>& mesh, std::string filename)
+{
+  using Triangle = ElementT;
   using Node = typename Triangle::Node;
   using Point = typename Node::Point;
   using Scalar = typename Point::Scalar;
