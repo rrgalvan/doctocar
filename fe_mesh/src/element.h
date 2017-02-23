@@ -10,6 +10,9 @@ template<class NodeT, int N>
 class Element
 {
 public:
+  typedef NodeT Node;
+  int Nnod=N;
+
   //! Default constructor
   Element();
 

@@ -9,17 +9,17 @@ int main() {
   Element<Node<double>,2> e1;  // Default constructor
   cout << "Element e1:" << endl << e1 << endl;
 
-  Node2D *a = new Node2D( Point2D(0,0) );
-  Node2D *b = new Node2D( Point2D(0,1) );
-  Node2D *c = new Node2D( Point2D(1,0) );
+  auto a = new Node2D( Point2D(0,0), 1);
+  auto b = new Node2D( Point2D(0,1), 2);
+  auto c = new Node2D( Point2D(1,0), 3);
   Element<Node2D, 3> e2(*a,*b,*c); // Triangle constructor (from 3 nodes)
   cout << "Element e2:" << endl << e2 << endl;
 
   Element<Node2D, 3> e3(e2); // Copy constructor
   cout << "Element e3:" << endl << e3 << endl;
 
-  Node2D *d = new Node2D( Point2D(1,1) );
-  Element<Node2D, 3> e4(*b,*c,*d); // Are increased sharing elements?
+  auto d = new Node2D( Point2D(1,1) );
+  Element<Node2D, 3> e4(*b,*c,*d);
   cout << "Element e4:" << endl << e4 << endl;
 
   Element<Node2D, 3> e5;

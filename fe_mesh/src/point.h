@@ -8,6 +8,8 @@ template <std::size_t Dim, typename T>
 class Point
 {
 public:
+  typedef T Scalar;
+
   /// Default constructor
   Point() {
     std::fill_n(coord, Dim, T());

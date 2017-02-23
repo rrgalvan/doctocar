@@ -1,10 +1,8 @@
 #include <iostream>
 #include "mesh.h"
 
-using namespace std;
-
 int main() {
-  cout << "Testing Mesh class..."  << endl;
+  std::cout << "Testing Mesh class..."  << std::endl;
   auto a = new Node2D( Point2D(0,0), 1 );
   auto b = new Node2D( Point2D(1,0), 2 );
   auto c = new Node2D( Point2D(0,1), 3 );
@@ -20,8 +18,11 @@ int main() {
 
   int i=0;
   for(auto const& e : m.elements()) {
-    cout << "Element " << i++ << endl;
-    cout << e << endl;
+    std::cout << "Element " << i++ << std::endl;
+    std::cout << e << std::endl;
   }
 
+  Mesh<Triangle> m2;
+  read_file_msh(m2, "square_mesh_2x2.msh");
+  std::cout << "m2=" << std::endl << m2 << std::endl;
 }

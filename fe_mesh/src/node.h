@@ -9,6 +9,8 @@ typedef std::size_t size_t;
 /// A node class
 template<class PointT> class Node {
 public:
+  typedef PointT Point;
+
   //! \brief Default constructuor
   //! \param coord Coordinates in space
   //! \param ind Index for current node
