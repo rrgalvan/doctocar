@@ -6,18 +6,22 @@
 #include <fstream> // For read mesh
 #include "element.h"
 
-template<class ElementT>
+//! Mesh composed of elements
+template<class ElementT, class ElementContainerT=std::list<ElementT>>
 class Mesh
 {
  public:
+  /// Access of type of elements stored
+  typedef ElementT Element;
+
   //! Default constructor
   Mesh() {}
   /// Copy constructor (delegated copying of internal containers)
   Mesh(Mesh const&) {}
   //! Destructor
   ~Mesh() {}
-  /// Access to elements
-  std::list<ElementT> elements() const {
+  /// Access to elements stored in the mesh
+  ElementContainerT elements() const {
     return _elements;
   }
   /// Append an element
@@ -26,14 +30,14 @@ class Mesh
   }
  private:
   // Elements stored in current mesh
-  std::list<ElementT> _elements;
+  ElementContainerT _elements;
 
 };
 
 
 //! Print Mesh contents
-template<class ElementT>
-std::ostream& operator<<(std::ostream& os, Mesh<ElementT> const& m) {
+template<class ElementT, class ElementContainerT>
+std::ostream& operator<<(std::ostream& os, Mesh<ElementT, ElementContainerT> const& m) {
   int i=0;
   for(auto const& e : m.elements()) {
     os << "Element " << i++ << std::endl;
@@ -48,11 +52,11 @@ std::ostream& operator<<(std::ostream& os, Mesh<ElementT> const& m) {
  * \param nx Number of subdivisions on the x-axis
  * \param ny Number of subdivisions on the y-axis
  */
-template<class ElementT>
-Mesh<ElementT> build_square_msh(int nx, int ny)
+template<class MeshT>
+MeshT build_square_msh(int nx, int ny)
 {
-  using Mesh = Mesh<ElementT>;
-  using Square = ElementT;
+  using Mesh = MeshT;
+  using Square = typename Mesh::Element;
   using Node = typename Square::Node;
   using Point = typename Node::Point;
   using Scalar = typename Point::Scalar;
@@ -99,10 +103,11 @@ Mesh<ElementT> build_square_msh(int nx, int ny)
  * \param filename
  * \returns 0 if file was successfully opened and read
  */
-template<class ElementT> int read_file_msh(Mesh<ElementT>&mesh, std::string filename);
+template<class ElementT, class ElementContainerT>
+int read_file_msh(Mesh<ElementT, ElementContainerT>& mesh, std::string filename);
 
-template<>
-int read_file_msh(Mesh<Element<Node2D, 3> >&mesh, std::string filename) {
+template<class ElementContainerT>
+int read_file_msh(Mesh<Element<Node2D, 3>, ElementContainerT>& mesh, std::string filename) {
   using Triangle = Element<Node2D, 3>;
   using Node = typename Triangle::Node;
   using Point = typename Node::Point;

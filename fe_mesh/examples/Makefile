@@ -1,5 +1,5 @@
 FE_MESH_SRC=../src
-TARGETS = point_example node_example element_example mesh_example
+TARGETS = point_example node_example element_example mesh_example cell_example
 INCLUDE_DIR = $(FE_MESH_SRC)
 OBJECTS = $(wildcard $(FE_MESH_SRC)/*.o)
 INCLUDES = $(wildcard $(FE_MESH_SRC)/*.h)
@@ -17,6 +17,9 @@ element_example: element_example.cpp
 	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
 
 mesh_example: mesh_example.cpp
+	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
+
+cell_example: cell_example.cpp
 	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
 
 clean:
