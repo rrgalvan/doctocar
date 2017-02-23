@@ -52,38 +52,47 @@ std::ostream& operator<<(std::ostream& os, Mesh<ElementT> const& m) {
  * @param filename
  */
 template<class ElementT>
-void read_file_msh(Mesh<ElementT>&m, std::string filename) {
+int read_file_msh(Mesh<ElementT>&m, std::string filename) {
   using Node = typename ElementT::Node;
   using Point = typename Node::Point;
   using Scalar = typename Point::Scalar;
   using Triangle = ElementT;
 
-  std::cout << "opening msh file: " << filename << std::endl;
-  std::fstream meshfile(filename, std::ios_base::in);
-
+  std::clog << "opening msh file: " << filename << std::endl;
+  std::fstream meshfile;
+ // file.exceptions ( ifstream::failbit | ifstream::badbit );
+  try {
+    meshfile.open(filename, std::ios_base::in);
+    if( !meshfile ) throw std::ios::failure( "Error opening file!" ) ;
+  }
+  catch (const std::ifstream::failure& e) {
+    std::cerr << e.what() << '\n';
+    return(1);
+  }
   unsigned int nver, ncel, nedg;
-  meshfile >> nver; // >> ncel >> nedg;
-  std::cout << "nver=" << nver << " ncel=" << ncel
+  meshfile >> nver >> ncel >> nedg;
+  std::clog << "nver=" << nver << " ncel=" << ncel
   	    << " nedg=" << nedg << std::endl;
   std::vector<Node*> vertices(nver);
 
-  /* for(int i=0; i<nver; i++) { */
-  /*   std::cout << "i=" << i << std::endl; */
-  /*   Scalar x, y; */
-  /*   std::size_t label; */
-  /*   meshfile >> x >> y >> label; */
-  /*   std::cout << "i=" << i << std::endl; */
-  /*   auto p = new Node( Point(x, y), label); */
-  /*   vertices[i]=p; */
-  /* } */
+  for(int i=0; i<nver; i++) {
+    Scalar x, y;
+    std::size_t label;
+    meshfile >> x >> y >> label;
+    std::clog << "Node (" << i << "): ";
+    auto p = new Node( Point(x, y), i);
+    std::clog << *p << std::endl;
+    vertices[i]=p;
+  }
 
-  /* for(int i=0; i<ncel; i++) { */
-  /*   unsigned int id0, id1, id2, zero; */
-  /*   meshfile >> id0 >> id1 >> id2 >> zero; */
-  /*   Triangle t( *vertices[id0-1], *vertices[id1-1], *vertices[id2-1] ); */
-  /*   m.append_element(t); */
-  /* } */
+  for(int i=0; i<ncel; i++) {
+    unsigned int id0, id1, id2, zero;
+    meshfile >> id0 >> id1 >> id2 >> zero;
+    Triangle t( *vertices[id0-1], *vertices[id1-1], *vertices[id2-1] );
+    m.append_element(t);
+  }
 
+  return(0);
 }
 
 #endif // __MESH_H__

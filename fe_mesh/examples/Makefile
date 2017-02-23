@@ -7,16 +7,16 @@ CXX_FLAGS=-std=c++11
 
 all: $(TARGETS)
 
-point_example: point_example.cpp $(INCLUDES)
+point_example: point_example.cpp
 	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
 
-node_example: node_example.cpp $(INCLUDES)
+node_example: node_example.cpp
 	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
 
-element_example: element_example.cpp $(INCLUDES)
+element_example: element_example.cpp
 	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
 
-mesh_example: mesh_example.cpp $(INCLUDES)
+mesh_example: mesh_example.cpp
 	g++ -o $@ $< -I$(INCLUDE_DIR) $(CXX_FLAGS) $(OBJECTS)
 
 clean:

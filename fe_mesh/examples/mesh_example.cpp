@@ -25,4 +25,8 @@ int main() {
   Mesh<Triangle> m2;
   read_file_msh(m2, "square_mesh_2x2.msh");
   std::cout << "m2=" << std::endl << m2 << std::endl;
+
+  Mesh<Triangle> m3;
+  read_file_msh(m3, "unit_circle_24.msh");
+  std::cout << "m3=" << std::endl << m3 << std::endl;
 }
