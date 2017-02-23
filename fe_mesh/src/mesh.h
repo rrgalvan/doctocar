@@ -43,20 +43,23 @@ std::ostream& operator<<(std::ostream& os, Mesh<ElementT> const& m) {
 }
 
 
-/**
+/*!
  * Read mesh (msh format) from a file
  *
  * Try to read mesh contents from a .msh file (for information about the
  * structure of these files, see FreeFem++ documentation).
  *
- * @param filename
+ * \param filename
+ * \returns 0 if file was successfully opened and read
  */
-template<class ElementT>
-int read_file_msh(Mesh<ElementT>&m, std::string filename) {
-  using Node = typename ElementT::Node;
+template<class ElementT> int read_file_msh(Mesh<ElementT>&m, std::string filename);
+
+template<>
+int read_file_msh(Mesh<Element<Node2D, 3> >&m, std::string filename) {
+  using Triangle = Element<Node2D, 3>;
+  using Node = typename Triangle::Node;
   using Point = typename Node::Point;
   using Scalar = typename Point::Scalar;
-  using Triangle = ElementT;
 
   std::clog << "opening msh file: " << filename << std::endl;
   std::fstream meshfile;

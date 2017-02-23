@@ -140,7 +140,7 @@
 
 * [OpenMP](https://htmlpreview.github.io/?https://github.com/rrgalvan/doctocar/blob/master/intro-openmp.html)
 
-## Temas relacionados y material compolementario
+## Temas relacionados y material complementario
 
 ### Particle tracing
 * [Particle Tracing](https://ai2-s2-pdfs.s3.amazonaws.com/0a62/57254285aa7d792a1056a19c31f5f79d0576.pdf)
