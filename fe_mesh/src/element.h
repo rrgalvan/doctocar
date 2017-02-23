@@ -17,10 +17,10 @@ public:
   explicit Element(NodeT&, NodeT&, NodeT&);
 
   //! Copy constructor
-  explicit Element(Element<NodeT,N>&);
+  explicit Element(Element<NodeT,N> const&);
 
   //! Assignement operator
-  const Element<NodeT,N>& operator=(Element<NodeT,N>&);
+  const Element<NodeT,N>& operator=(Element<NodeT,N> const&);
 
   //! Destructor
   ~Element() {}
@@ -49,26 +49,22 @@ Element<NodeT,N>::Element(NodeT& a, NodeT& b, NodeT& c) {
   node_ptr[0] = std::shared_ptr<NodeT>(&a);
   node_ptr[1] = std::shared_ptr<NodeT>(&b);
   node_ptr[2] = std::shared_ptr<NodeT>(&c);
-  for(int i=0; i<N; i++) node_ptr[i]->incSharingElements();
 }
 
 // Copy constructor
 template<class NodeT, int N>
-Element<NodeT,N>::Element(Element<NodeT,N>& e) {
+Element<NodeT,N>::Element(Element<NodeT,N> const& e) {
   for(int i=0; i<N; i++) {
     node_ptr[i] = e.node_ptr[i];
-    node_ptr[i]->incSharingElements();
   }
 }
 
 // Assignment operator
 template<class NodeT, int N>
-const Element<NodeT,N>& Element<NodeT,N>::operator=(Element<NodeT,N>& e) {
+const Element<NodeT,N>& Element<NodeT,N>::operator=(Element<NodeT,N> const& e) {
   if(this != &e) {
     for(int i=0; i<N; i++) {
-      node_ptr[i] -> decSharingElements();
       node_ptr[i] = e.node_ptr[i];
-      node_ptr[i] -> incSharingElements();
     }
   }
   return *this;

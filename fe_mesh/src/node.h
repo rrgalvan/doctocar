@@ -12,14 +12,13 @@ public:
   //! \brief Default constructuor
   //! \param coord Coordinates in space
   //! \param ind Index for current node
-  //! \param sharing Number of elements that share current node
-  Node(const PointT&coord=PointT(0.), size_t ind=-1, size_t sharing=0)
-    : coord(coord), index(ind), sharingElements(sharing)
+  Node(const PointT&coord=PointT(0.), size_t ind=-1)
+    : coord(coord), index(ind)
   {}
 
   //! Copy constructor
   explicit Node(const Node& n)
-    : coord(n.coord), index(n.index), sharingElements(n.sharingElements){}
+    : coord(n.coord), index(n.index) {}
 
   //! Assignement operator
   const Node& operator=(const Node& node);
@@ -37,30 +36,10 @@ public:
     return index;
   }
 
-  //! Read number of elements that share this node
-  size_t getSharingElements() const{
-    return sharingElements;
-  }
-
-  //! Increase number of elements that share this node
-  void incSharingElements(){
-    sharingElements++;
-  }
-
-  //! Decrease number of elements that share this node
-  size_t decSharingElements(){
-    return !(--sharingElements);
-  }
-
-  //! Indicate a dangling node
-  size_t noSharingElement() const {
-    return !sharingElements;
-  }
 
 private:
   PointT coord;
   size_t index;
-  size_t sharingElements;
 };
 
 /// Node1D
@@ -74,8 +53,7 @@ typedef Node<Point3D> Node3D;
 template<class PointT>
 void print(const Node<PointT>&n){
   print(n());
-  printf("index=%d; %d sharing elements\n",
-	 n.getIndex(),n.getSharingElements());
+  printf("index=%d \n", n.getIndex());
 }
 
 // Assignment operator
@@ -84,7 +62,6 @@ const Node<PointT>& Node<PointT>::operator=(const Node<PointT>& n){
   if(this != &n){
     coord = n.coord;
     index = n.index;
-    sharingElements = n.sharingElements;
   }
   return *this;
 }
@@ -92,8 +69,7 @@ const Node<PointT>& Node<PointT>::operator=(const Node<PointT>& n){
 //! Print a node
 template<class PointT>
 std::ostream &operator<<(std::ostream &os, Node<PointT> const &n) {
-  os << n.getCoord() << ": index=" << n.getIndex()
-     << ", sharing_elements=" << n.getSharingElements();
+  os << n.getCoord() << ": index=" << n.getIndex();
   return os;
 }
 

@@ -13,14 +13,14 @@ class Mesh
   //! Destructor
   ~Mesh() {}
   /// Access to elements
-  std::list<ElementT> elements() {
+  std::list<ElementT> elements() const {
     return _elements;
   }
   /// Append an element
-  void append_element(ElementT& e) {
+  void append_element(ElementT const& e) {
     _elements.push_back(e);
   }
- public:
+ private:
   // Elements stored in current mesh
   std::list<ElementT> _elements;
 

@@ -9,7 +9,6 @@ int main() {
   Node<double> node1;  // Default constructor
   Node<double> node2(1.0); // Default construtor
   Node<double> node3(node1); // Copy construtor
-  node2.incSharingElements();
   cout << node1 << endl;
   cout << node2 << endl;
   cout << node3 << endl;
