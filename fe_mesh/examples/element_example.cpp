@@ -19,11 +19,11 @@ int main() {
   cout << "Element e3:" << endl << e3 << endl;
 
   auto d = new Node2D( Point2D(1,1) );
-  Element<Node2D, 3> e4(*b,*c,*d);
+  Element<Node2D, 4> e4(*a,*b,*c,*d);
   cout << "Element e4:" << endl << e4 << endl;
 
   Element<Node2D, 3> e5;
-  e4 = e3; // Asignement operator
+  e5 = e3; // Asignement operator
   cout << "Element e5:" << endl << e5 << endl;
 
 }

@@ -12,6 +12,8 @@ class Mesh
  public:
   //! Default constructor
   Mesh() {}
+  /// Copy constructor (delegated copying of internal containers)
+  Mesh(Mesh const&) {}
   //! Destructor
   ~Mesh() {}
   /// Access to elements
@@ -26,8 +28,6 @@ class Mesh
   // Elements stored in current mesh
   std::list<ElementT> _elements;
 
-  /// Copy constructor is forbidden (private and not implemented)
-  Mesh(Mesh const&);
 };
 
 
@@ -42,20 +42,67 @@ std::ostream& operator<<(std::ostream& os, Mesh<ElementT> const& m) {
   return os;
 }
 
+/*!
+ * \brief Build a structured (quadrangular) mesh for the unit square
+ *
+ * \param nx Number of subdivisions on the x-axis
+ * \param ny Number of subdivisions on the y-axis
+ */
+template<class ElementT>
+Mesh<ElementT> build_square_msh(int nx, int ny)
+{
+  using Mesh = Mesh<ElementT>;
+  using Square = ElementT;
+  using Node = typename Square::Node;
+  using Point = typename Node::Point;
+  using Scalar = typename Point::Scalar;
+
+  Mesh mesh;
+  int ncell = nx*ny, nver=(nx+1)*(ny+1);
+
+  // 1. Define points
+  std::vector<Node*> vertices(nver);
+  Scalar dx=1.0/nx, dy=1.0/ny;
+  int index=0;
+  for(int i=0; i<=nx; i++) {
+    Scalar x=i*dx;
+    Scalar y=0;
+    for(int j=0; j<=ny; j++) {
+      std::clog << "Node (" << index << "): ";
+      auto p = new Node( Point(x,y), index);
+      std::clog << *p << std::endl;
+      vertices[index++]=p;
+      y+=dy;
+    }
+  }
+  // 2. Define cells
+  index=0;
+  for(int i=0; i<nx; i++) {
+    int i0=nx*i, i1=nx*(i+1);
+    for(int j=0; j<ny; j++) {
+      Square s( *vertices[i0+j], *vertices[i0+j+1],
+		*vertices[i1+j], *vertices[i1+j+1] );
+      mesh.append_element(s);
+    }
+  }
+  return mesh;
+}
+
 
 /*!
- * Read mesh (msh format) from a file
+ * \brief Read a triangular mesh (msh format) from a file
  *
- * Try to read mesh contents from a .msh file (for information about the
- * structure of these files, see FreeFem++ documentation).
+ * Try to read mesh contents from a .msh file (for information about
+ * the structure of these files, see FreeFem++ documentation). The
+ * mesh is defined by triangular elements.
  *
  * \param filename
  * \returns 0 if file was successfully opened and read
  */
-template<class ElementT> int read_file_msh(Mesh<ElementT>&m, std::string filename);
+template<class ElementT> int read_file_msh(Mesh<ElementT>&mesh, std::string filename);
 
 template<>
-int read_file_msh(Mesh<Element<Node2D, 3> >&m, std::string filename) {
+int read_file_msh(Mesh<Element<Node2D, 3> >&mesh, std::string filename) {
   using Triangle = Element<Node2D, 3>;
   using Node = typename Triangle::Node;
   using Point = typename Node::Point;
@@ -92,7 +139,7 @@ int read_file_msh(Mesh<Element<Node2D, 3> >&m, std::string filename) {
     unsigned int id0, id1, id2, zero;
     meshfile >> id0 >> id1 >> id2 >> zero;
     Triangle t( *vertices[id0-1], *vertices[id1-1], *vertices[id2-1] );
-    m.append_element(t);
+    mesh.append_element(t);
   }
 
   return(0);

@@ -19,6 +19,9 @@ public:
   //! Construtor from three nodes
   explicit Element(NodeT&, NodeT&, NodeT&);
 
+  //! Construtor from four nodes
+  explicit Element(NodeT&, NodeT&, NodeT&, NodeT&);
+
   //! Copy constructor
   explicit Element(Element<NodeT,N> const&);
 
@@ -47,12 +50,25 @@ Element<NodeT,N>::Element() {
   for(int i=0; i<N; i++) node_ptr[i] = std::shared_ptr<NodeT>(new NodeT);
 }
 
+// Constructor from 3 nodes
 template<class NodeT, int N>
 Element<NodeT,N>::Element(NodeT& a, NodeT& b, NodeT& c) {
+  static_assert(N==3, "3 nodes needed for Element<NodeT,3> constructor");
   node_ptr[0] = std::shared_ptr<NodeT>(&a);
   node_ptr[1] = std::shared_ptr<NodeT>(&b);
   node_ptr[2] = std::shared_ptr<NodeT>(&c);
 }
+
+// Constructor from 4 nodes
+template<class NodeT, int N>
+Element<NodeT,N>::Element(NodeT& a, NodeT& b, NodeT& c, NodeT& d) {
+  static_assert(N==4, "4 nodes needed for Element<NodeT,4> constructor");
+  node_ptr[0] = std::shared_ptr<NodeT>(&a);
+  node_ptr[1] = std::shared_ptr<NodeT>(&b);
+  node_ptr[2] = std::shared_ptr<NodeT>(&c);
+  node_ptr[3] = std::shared_ptr<NodeT>(&d);
+}
+
 
 // Copy constructor
 template<class NodeT, int N>
