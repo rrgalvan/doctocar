@@ -140,6 +140,16 @@
 
 * [OpenMP](https://htmlpreview.github.io/?https://github.com/rrgalvan/doctocar/blob/master/intro-openmp.html)
 
+## Sesión 7
+
+### Juego de la vida, versión clásica.
+
+  * Implmentación de Daniel/ecosistema_python
+  * Otras implementaciones
+  * Paralelización
+  * Paralelización del problema de Poisson (OpenMP)
+  * Paralelización del problema de Poisson (MPI)
+
 ## Temas relacionados y material complementario
 
 ### Particle tracing
@@ -150,3 +160,4 @@
 * [Conway's Game of Life (Wikipedia)](https://en.wikipedia.org/wiki/Conway's_Game_of_Life)
 * [Golly (Potente versión, con licencia libre)](http://golly.sourceforge.net/)
 * [Implementación en (decenas de) lenguajes](http://rosettacode.org/wiki/Conway%27s_Game_of_Life)
+* [SmoothLife](https://arxiv.org/pdf/1111.1567.pdf) (generalización del juego de la vida a un dominio continuo). Ver también [este vídeo](https://www.youtube.com/watch?v=KJe9H6qS82I).
