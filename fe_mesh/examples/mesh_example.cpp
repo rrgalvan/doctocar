@@ -1,5 +1,5 @@
 #include <iostream>
-#include "mesh.h"
+#include "mesh/mesh.h"
 
 int main() {
   std::cout << "Testing Mesh class..."  << std::endl;

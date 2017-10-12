@@ -1,6 +1,5 @@
 #include <iostream>
-#include "node.h"
-#include "point.h"
+#include "mesh/node.h"
 
 using namespace std;
 

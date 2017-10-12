@@ -1,6 +1,6 @@
 #include <iostream>
-#include "mesh.h"
-#include "cell.h"
+#include "mesh/mesh.h"
+#include "mesh/cell.h"
 
 int main() {
   std::cout << "Testing Cell class..."  << std::endl;

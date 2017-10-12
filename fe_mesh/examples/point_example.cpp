@@ -1,5 +1,5 @@
 #include <iostream>
-#include "point.h"
+#include "mesh/point.h"
 
 int main() {
   std::cout << "Testing Point class..."  << std::endl;
